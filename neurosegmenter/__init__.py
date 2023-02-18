@@ -1,0 +1,1 @@
+from neurosegmenter.plugins import load_plugins
