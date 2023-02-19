@@ -28,11 +28,6 @@ class TestPluginModel(TrainableModel, Plugin):
                         path="test_plugin.test_int"),
         ]
     
-    def __init__(self) -> None:
-        super().__init__()
-        for param in self.parameters:
-            setattr(self, param.name, param.default)
-            
     def get_model(self) -> Model:
         return Model()
 
@@ -53,16 +48,11 @@ class TestPluginMetric(Plugin, Metric):
                         default=1,
                         path="test_plugin.test_int"),
         ]
-    
-    def __init__(self) -> None:
-        super().__init__()
-        for param in self.parameters:
-            setattr(self, param.name, param.default)
             
     def __call__(self, y_true: np.ndarray, y_pred: np.ndarray) -> np.ndarray:
         return np.array([1, 2, 3])
             
             
 def initialize() -> None:
-    register_plugin(TestPluginModel)
+    register_plugin(TestPluginModel) 
     register_plugin(TestPluginMetric)

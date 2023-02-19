@@ -41,7 +41,13 @@ class Plugin(Protocol):
     type: PluginType # plugin type, e.g. model, datagen, loss, metric, optimizer, callback
     description: str # plugin description
     parameters: list[PluginParameter] # plugin parameters
-
+    
+    def __init__(self) -> None:
+        for param in self.parameters:
+            setattr(self, param.name, param.default)
+            
+    def __repr__(self) -> str:
+        return f"NeuroSegmenter Plugin: {self.name} ({self.type})"
     
 def import_plugin_module(plugin_name: str) -> PluginInterface:
     """Load a model plugin."""
@@ -57,7 +63,8 @@ def load_plugins(plugins: list[str]) -> None:
 
 registered_plugins: dict[str, Plugin] = {}        
       
-def register_plugin(plugin: Plugin) -> None:
+def register_plugin(plugin: Any) -> None: # ignoring type for now # TODO: fix type
+
     """Register a plugin."""
     registered_plugins[plugin.name] = plugin 
     

@@ -31,10 +31,6 @@ class SimpleModelFromKerasModelClass(TrainableModel, Plugin):
     
     activation: str
     
-    def __init__(self) -> None:
-        for param in self.parameters:
-            setattr(self, param.name, param.default)
-    
     def createKerasModel(self):
         return SimpleModelFromKerasModelClass.SimpleKerasModel(self)
     
@@ -72,10 +68,6 @@ class SimpleModelFromKerasFunctional(TrainableModel, Plugin):
     type: PluginType = PluginType.MODEL
     
     activation: str
-    
-    def __init__(self) -> None:
-        for param in self.parameters:
-            setattr(self, param.name, param.default)
             
     def get_model(self) -> Model:
         """just a simple model with a single conv layer and a dense layer"""
