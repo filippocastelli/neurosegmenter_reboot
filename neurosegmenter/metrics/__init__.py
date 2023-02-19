@@ -1,1 +1,1 @@
-from neurosegmenter.metrics.metric import Metric
+from neurosegmenter.metrics.metric import Metric, Loss
