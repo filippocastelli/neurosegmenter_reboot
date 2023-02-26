@@ -135,8 +135,7 @@ class RMSpropOptimizer(Plugin, Optimizer):
             jit_compile=self.jit_compile)
         return optimizer
 
-
-
+plugins.append(RMSpropOptimizer)
 
 class AdamOptimizer(Plugin, Optimizer):
     name: str = "Adam Optimizer"
@@ -269,3 +268,6 @@ class AdamOptimizer(Plugin, Optimizer):
     
     
 plugins.append(AdamOptimizer)
+
+for plugin in plugins:
+    register_plugin(plugin)
